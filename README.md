@@ -27,3 +27,8 @@ Example Output: <br><br>
 1 1 1 1 0 0 0 1 1 1 1 1 1 1<br>
 1 1 1 1 1 0 1 1 1 1 1 1 1 1<br>
 
+#How to submit your code - 
+*Fork the repository
+*When your code is ready, submit a pull request to the submissions branch
+*Add a txt file with your name, any collaborators and your algorithm
+
