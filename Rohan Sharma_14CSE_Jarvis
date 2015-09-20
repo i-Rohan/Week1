@@ -1,0 +1,137 @@
+/*
+Name: Rohan Sharma
+Roll no.: 14BTCSERS046
+Stream: CSE
+Compiler: GNU GCC
+IDE: Code Blocks
+OS: Windows 8.1 Pro
+*/
+
+#include <iostream>
+#include <fstream>
+#include <stdlib.h> //for 'exit()'
+
+using namespace std;
+
+/*---------------
+Global Variables
+-----------------*/
+int a[1024][1024];
+
+/*----------------------------
+Function Declaration
+------------------------------*/
+/*
+This functions recursively fills the surroundings of a[i][j] (i,j are passed to the function) 
+Note: Surroundings are top, bottom, left, right
+*/
+void fill_recursively(int,int);
+
+int main()
+{
+    char c;
+    int i,j,row=0,col=0;
+    ifstream fin;   //to create input stream
+    fin.open("input.txt",ios::in);  //to connect 'input.txt' to input stream 'fin'
+    fin.seekg(0);   //to bring file pointer to file beginning
+    if(!fin)    //to prompt error message if input file is not present
+    {
+        cout<<"Please add the file 'input.txt' in the same directory!\n\n";
+        system("pause");
+        exit(0);
+    }
+    while(!fin.eof())   //to count number of rows & columns & store the matrix from file in the 2D array 'a'
+    {
+        fin.get(c);
+        if(isdigit(c))
+        {
+            a[row][col++]=c-48;
+        }
+        if(c=='\n')
+        {
+            row++;
+            col=0;
+        }
+    }
+    row++;
+    col--;
+    fin.close();    //to disconnect 'input.txt' from 'fin'
+    /*
+    To start filling from boundary of the 2D array
+    Note: Outside filled places become '2'
+    */
+    for(i=0;i<row;i++)  
+        for(j=0;j<col;j++)
+        {
+            if(i==0||i==row-1)
+                if(a[i][j]==1)
+                {
+                    a[i][j]==2;
+                    fill_recursively(i,j);
+                }
+            else if(j==0||j==col-1)
+                if(a[i][j]==1)
+                {
+                    a[i][j]=2;
+                    fill_recursively(i,j);
+                }
+        }
+    for(i=0;i<row;i++)  //to convert remaining 1s to 0s
+        for(j=0;j<col;j++)
+            if(a[i][j]==1)
+                a[i][j]=0;
+    for(i=0;i<row;i++)  //to convert 2s back to 1s
+        for(j=0;j<col;j++)
+            if(a[i][j]==2)
+                a[i][j]=1;
+    ofstream fout;
+    fout.open("output.txt",ios::out|ios::trunc);
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            fout<<a[i][j];
+            if(j!=col-1)
+                fout<<" ";
+        }
+        if(i!=row-1)
+            fout<<"\n";
+    }
+    fout.close();
+    cout<<"Done!\nCheck file 'output.txt'\n\n\n\n\n";
+    return 0;
+}
+
+void fill_recursively(int i,int j)
+{
+    if(a[i][j-1]==1)
+    {
+        a[i][j-1]=2;
+        fill_recursively(i,j-1);
+    }
+    if(a[i-1][j]==1)
+    {
+        a[i-1][j]=2;
+        fill_recursively(i-1,j);
+    }
+    if(a[i][j+1]==1)
+    {
+        a[i][j+1]=2;
+        fill_recursively(i,j+1);
+    }
+    if(a[i+1][j]==1)
+    {
+        a[i+1][j]=2;
+        fill_recursively(i+1,j);
+    }
+    if(a[i+1][j]==1)
+    {
+        a[i+1][j]=2;
+        fill_recursively(i+1,j);
+    }
+    if(a[i+1][j]==1)
+    {
+        a[i+1][j]=2;
+        fill_recursively(i+1,j);
+    }
+}
