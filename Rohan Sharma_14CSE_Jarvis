@@ -21,6 +21,10 @@ int a[1024][1024];
 /*----------------------------
 Function Declaration
 ------------------------------*/
+/*
+This functions recursively fills the surroundings of a[i][j] (i,j are passed to the function) 
+Note: Surroundings are top, bottom, left, right
+*/
 void fill_recursively(int,int);
 
 int main()
