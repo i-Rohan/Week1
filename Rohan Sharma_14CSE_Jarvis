@@ -2,6 +2,7 @@
 Name: Rohan Sharma
 Roll no.: 14BTCSERS046
 Stream: CSE
+Language: C++
 Compiler: GNU GCC
 IDE: Code Blocks
 OS: Windows 8.1 Pro
@@ -66,7 +67,7 @@ int main()
             if(i==0||i==row-1)
                 if(a[i][j]==1)
                 {
-                    a[i][j]==2;
+                    a[i][j]=2;
                     fill_recursively(i,j);
                 }
             else if(j==0||j==col-1)
@@ -118,16 +119,6 @@ void fill_recursively(int i,int j)
     {
         a[i][j+1]=2;
         fill_recursively(i,j+1);
-    }
-    if(a[i+1][j]==1)
-    {
-        a[i+1][j]=2;
-        fill_recursively(i+1,j);
-    }
-    if(a[i+1][j]==1)
-    {
-        a[i+1][j]=2;
-        fill_recursively(i+1,j);
     }
     if(a[i+1][j]==1)
     {
