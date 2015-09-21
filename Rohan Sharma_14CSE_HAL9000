@@ -1,0 +1,84 @@
+/*
+Name: Rohan Sharma
+Roll no.: 14BTCSERS046
+Stream: CSE
+Language: C++
+Compiler: GNU GCC
+IDE: Code Blocks
+OS: Windows 8.1 Pro
+*/
+
+#include <iostream>
+
+using namespace std;
+
+/*----------------------
+Global Variables
+------------------------*/
+int a[100],b[100];
+
+/*------------------
+Function Declaration
+--------------------*/
+void quicksort(int*,int);
+
+int main()
+{
+    int i,j,m,n,size,min_dot_product=0;
+    cout<<"Enter size of Vector A: ";
+    cin>>m; //input size of array a[]
+    for(i=0;i<m;i++)    //input elements of array a[]
+    {
+        cout<<"Enter element "<<i+1<<" of Vector A: ";
+        cin>>a[i];
+    }
+    cout<<"Enter size of Vector B: ";
+    cin>>n; //input size of array b[]
+    for(i=0;i<n;i++)    //input elements of array b[]
+    {
+        cout<<"Enter element "<<i+1<<" of Vector B: ";
+        cin>>b[i];
+    }
+    if(m>n) //if size is different, then making size same by filling up vacant spaces with '0'
+    {
+        for(i=n;i<m;i++)
+            b[i]=0;
+        size=m;
+    }
+    else if(n>m)    //if size is different, then making size same by filling up vacant spaces with '0'
+    {
+        for(i=m;i<n;i++)
+            a[i]=0;
+        size=n;
+    }
+    else
+        size=n;
+    quicksort(a,size); //soring array a using quicksort
+    quicksort(b,size); //soring array b using quicksort
+    for(i=0,j=size-1;i<size,j>=0;i++,j--)   //calculating min dot product
+        min_dot_product+=(a[i]*b[j]);
+    cout<<"Minimum Dot Product = "<<min_dot_product;
+    return 0;
+}
+
+void quicksort(int *ar,int size)
+{
+    int i,j,pivot,temp;
+    if(size<2)
+        return;
+    pivot=ar[size/2];
+    for(i=0,j=size-1;;i++,j--)
+    {
+        while(ar[i]<pivot)
+            i++;
+        while(pivot<ar[j])
+            j--;
+        if(i>=j)
+            break;
+        temp=ar[i];
+        ar[i]=ar[j];
+        ar[j]=temp;
+    }
+    quicksort(ar,i);
+    quicksort(ar+i,size-i);
+}
